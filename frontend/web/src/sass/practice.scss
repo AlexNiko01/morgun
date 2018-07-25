@@ -1,0 +1,405 @@
+.practice {
+  position: relative;
+  .title_block {
+    text-align: right;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+    margin-right: 20%;
+    position: relative;
+    display: inline-block;
+    z-index: 5;
+    background-color: #fff;
+  }
+  .container {
+    padding: rem(90px);
+    position: relative;
+    z-index: 2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .practice_content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: rem(100px);
+    .practice_content_left {
+      width: 50%;
+      margin-right: rem(30px);
+      .practice_card {
+        height: rem(240px);
+        margin-bottom: rem(30px);
+        &:first-child {
+          height: rem(640px);
+        }
+      }
+    }
+    .practice_content_right {
+      width: 50%;
+      padding-top: rem(60px);
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      .practice_card {
+        height: rem(240px);
+        width: 100%;
+        margin-bottom: rem(30px);
+        &:nth-child(2), &:nth-child(3) {
+          -webkit-box-flex: 1;
+          -ms-flex: 1 1 40%;
+          flex: 1 1 40%;
+          width: 50%;
+        }
+        &:nth-child(2) {
+          margin-right: rem(30px);
+        }
+      }
+      &.vertically {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        .practice_card {
+          &:nth-child(2), &:nth-child(3) {
+            -webkit-box-flex: 1;
+            -ms-flex: auto;
+            flex: auto;
+            width: 100%;
+          }
+          &:nth-child(2) {
+            margin-right: 0;
+          }
+          &:nth-child(3) {
+            height: rem(640px);
+          }
+        }
+      }
+    }
+  }
+  .practice_top_right {
+    position: absolute;
+    right: rem(-40px);
+    top: rem(110px);
+    width: 100%;
+    max-width: rem(940px);
+    height: rem(570px);
+  }
+  .practice_top_left {
+    position: absolute;
+    left: rem(-40px);
+    bottom: rem(150px);
+    width: 100%;
+    max-width: rem(940px);
+    height: rem(570px);
+  }
+  .bg_logo_block {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    z-index: 1;
+    padding: 7% 0;
+    width: 100%;
+    img {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      height: auto;
+    }
+    &:before {
+      @include before_fig(50%, 100%, rgba(247, 247, 247, .68));
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+  }
+  &.animation {
+    .title_block {
+      opacity: 0;
+      -webkit-transition: .3s .3s;
+      transition: .3s .3s;
+    }
+    .practice_top_right, .practice_top_left {
+      path {
+        stroke-dasharray: 400% 400%;
+        stroke-dashoffset: 400%;
+        -webkit-transition: .3s;
+        transition: .3s;
+      }
+    }
+    .practice_card {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+    &.active {
+      .title_block {
+        opacity: 1;
+        -webkit-transition: .5s;
+        transition: .5s;
+      }
+      .practice_top_right {
+        path {
+          stroke-dashoffset: 0;
+          -webkit-transition: 1.5s .5s;
+          transition: 1.5s .5s;
+        }
+      }
+      .practice_card {
+        -webkit-transition: 1s .5s;
+        transition: 1s .5s;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      .practice_top_left {
+        path {
+          stroke-dashoffset: 0;
+          -webkit-transition: 1.5s 1.5s;
+          transition: 1.5s 1.5s;
+        }
+      }
+    }
+  }
+}
+
+.practice_card {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: rem(10px);
+  img {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+  }
+  .practice_card_wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: rem(10px);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #fff;
+    background-color: rgba(40, 40, 64, .65);
+    .line_effect {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(255, 255, 255, .09);
+      -webkit-transition: .5s;
+      transition: .5s;
+      span {
+        display: block;
+        background-color: $sky-color;
+        position: absolute;
+        &:first-child, &:last-child {
+          width: calc(100% - .9375rem);
+          height: rem(1px);
+          left: .46875rem;
+        }
+        &:first-child {
+          top: .3125rem;
+          &::before {
+            @include before_fig(0, rem(1px), #fff);
+            top: 0;
+            right: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:last-child {
+          bottom: .3125rem;
+          &::before {
+            @include before_fig(0, rem(1px), #fff);
+            top: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:nth-child(2), &:nth-child(3) {
+          height: calc(100% - .625rem);
+          width: rem(1px);
+          top: .3125rem;
+        }
+        &:nth-child(2) {
+          left: .46875rem;
+          &::before {
+            @include before_fig(rem(1px), 0, #fff);
+            bottom: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:nth-child(3) {
+          right: .46875rem;
+          &::before {
+            @include before_fig(rem(1px), 0, #fff);
+            top: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+      }
+    }
+    .line_effect2 {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      -webkit-transition: .5s;
+      transition: .5s;
+      background-color: rgba(255, 255, 255, .09);
+      span {
+        display: block;
+        background-color: $sky-color;
+        position: absolute;
+        &:first-child, &:last-child {
+          width: calc(100% - .625rem);
+          height: rem(1px);
+          left: .3125rem;
+        }
+        &:first-child {
+          top: .46875rem;
+          &::before {
+            @include before_fig(0, rem(1px), #fff);
+            top: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:last-child {
+          bottom: .46875rem;
+          &::before {
+            @include before_fig(0, rem(1px), #fff);
+            top: 0;
+            right: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:nth-child(2), &:nth-child(3) {
+          height: calc(100% - .9375rem);
+          width: rem(1px);
+          top: .46875rem;
+        }
+        &:nth-child(2) {
+          left: .3125rem;
+          &::before {
+            @include before_fig(rem(1px), 0, #fff);
+            top: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+        &:nth-child(3) {
+          right: .3125rem;
+          &::before {
+            @include before_fig(rem(1px), 0, #fff);
+            bottom: 0;
+            left: 0;
+            -webkit-transition: .5s;
+            transition: .5s;
+          }
+        }
+      }
+    }
+    .practice_card_title {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: rem(24px);
+      letter-spacing: rem(0.5px);
+      color: #fff;
+      margin-bottom: rem(15px);
+      -webkit-transition: margin-bottom .3s;
+      transition: margin-bottom .3s;
+    }
+    .practice_card_text {
+      margin-bottom: rem(-40px);
+      text-align: center;
+      font-size: rem(20px);
+      margin-top: rem(10px);
+      opacity: 0;
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+    .practice_card_line {
+      display: block;
+      width: rem(86px);
+      height: rem(1px);
+      background-color: #fff;
+    }
+    &:hover {
+      .practice_card_title {
+        margin-bottom: rem(5px);
+      }
+      .practice_card_text {
+        opacity: 1;
+        margin-bottom: 0;
+        margin-top: rem(5px);
+      }
+
+      .line_effect, .line_effect2 {
+        background-color: rgba(255, 255, 255, 0);
+        span {
+          &:first-child::before,
+          &:last-child::before {
+            width: 100%;
+          }
+          &:nth-child(2)::before,
+          &:nth-child(3)::before {
+            height: 100%;
+          }
+        }
+      }
+
+    }
+  }
+
+}

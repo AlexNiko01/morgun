@@ -1,0 +1,236 @@
+.feed_back_popup {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -100vw;
+  -webkit-transition: .5s;
+  transition: .5s;
+  opacity: 0;
+  background-color: #fff;
+  z-index: 102;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  width: 100%;
+  max-width: rem(620px);
+  padding: rem(110px) rem(75px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  &.active {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.feed_back_title {
+  font-size: rem(30px);
+  text-align: center;
+  color: $black-color;
+  margin-bottom: rem(20px);
+}
+
+.close_feedback {
+  display: block;
+  width: rem(50px);
+  cursor: pointer;
+  height: rem(50px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  i {
+    display: block;
+    width: rem(20px);
+    -webkit-transition: .3s;
+    transition: .3s;
+    height: rem(1px);
+    position: absolute;
+    background-color: $black-color;
+    &:first-child {
+      top: rem(22px);
+      left: rem(15px);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    &:last-child {
+      top: rem(22px);
+      left: rem(15px);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+  &:hover {
+    i {
+      background-color: $sky-color;
+      height: rem(3px);
+      width: rem(40px);
+      &:first-child {
+        top: rem(21px);
+        left: rem(5px);
+      }
+      &:last-child {
+        top: rem(21px);
+        left: rem(5px);
+      }
+    }
+  }
+}
+
+.main_popup_bg {
+  position: fixed;
+  display: block;
+  opacity: 0;
+  top: 100vh;
+  left: 100vw;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+  -webkit-transition: opacity .2s .3s, top .2s .5s, left .2s .5s;
+  transition: opacity .2s .3s, top .2s .5s, left .2s .5s;
+  background-color: rgba(29, 29, 35, .76);
+  &.active {
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+    top: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.menu_popup_bg {
+  position: fixed;
+  display: block;
+  opacity: 0;
+  top: 100vh;
+  left: 100vw;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  -webkit-transition: opacity .2s .3s, top .2s .5s, left .2s .5s;
+  transition: opacity .2s .3s, top .2s .5s, left .2s .5s;
+  overflow: hidden;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  &::before {
+    @include before_fig(100%, 100%, rgba(40, 40, 65, .91));
+    z-index: 3;
+    top: 0;
+    left: 0;
+  }
+  &.active {
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+    top: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.send_successful {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 110;
+  top: 0;
+  left: -150%;
+  opacity: 0;
+  transition: left .3s .4s, opacity .3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(29, 29, 35, .5);
+  .send_successful_wrap {
+    border: solid rem(5px) #fff;
+    width: 80vw;
+    height: 60vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%;
+    background-color: rgba(29, 29, 35, .9);
+    &::before {
+      @include before_fig(rem(5px), 50%, #fff);
+      top: 0;
+      left: 10%;
+    }
+    &::after {
+      @include before_fig(rem(5px), 50%, #fff);
+      bottom: 0;
+      right: 10%;
+    }
+    .send_successful_text {
+      width: 100%;
+      position: relative;
+      text-transform: uppercase;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      font-size: rem(42px);
+    }
+
+  }
+  &.active {
+    transition: left 0s, opacity .3s;
+    left: 0;
+    opacity: 1;
+    .send_successful_wrap {
+      .send_successful_text {
+        animation: in 3s ease-out forwards;
+        animation-delay: .5s;
+      }
+    }
+  }
+}
+
+.send_successful_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: rem(50px);
+  height: rem(50px);
+  cursor: pointer;
+  &::before, &::after {
+    @include before_fig(rem(3px), rem(20px), #fff);
+    top: rem(15px);
+    transition: .4s;
+  }
+  &::before {
+    left: rem(24px);
+    transform: rotate(45deg);
+  }
+  &::after {
+    right: rem(23px);
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    &::before, &::after {
+      height: rem(40px);
+      top: rem(4px);
+      background-color: $sky-color;
+    }
+  }
+
+}
+
+@keyframes in {
+  0% {
+    letter-spacing: -17px;
+    opacity: 0;
+  }
+  30% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+  100% {
+    letter-spacing: 4px;
+    opacity: 1;
+  }
+}

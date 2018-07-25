@@ -1,0 +1,127 @@
+.contact_section {
+  margin-top: -50vh;
+  position: relative;
+  z-index: 4;
+  > .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    .contact_section_right {
+      width: 100%;
+      .address_content {
+        padding: rem(50px);
+        .social_block {
+          margin-top: rem(30px);
+        }
+      }
+      .title_page {
+        margin-bottom: rem(55px);
+      }
+
+    }
+  }
+  &.animation {
+    margin-top: -40vh;
+    opacity: 0;
+    -webkit-transition: .3s;
+    transition: .3s;
+    &.active {
+      -webkit-transition: .8s;
+      transition: .8s;
+      margin-top: -50vh;
+      opacity: 1;
+    }
+  }
+  .social_block {
+    a {
+      width: rem(40px);
+      height: rem(40px);
+      -webkit-transition: .3s;
+      transition: .3s;
+      border: solid rem(1px) $sky-color;
+      &:hover {
+        border: solid rem(1px) #fff;
+      }
+    }
+  }
+}
+
+.contact_section_form {
+  padding: rem(75px);
+  background-color: #fff;
+  width: 100%;
+  .section_form_title {
+    font-size: rem(30px);
+    margin-bottom: rem(20px);
+    text-align: center;
+  }
+  .section_form_line {
+    display: block;
+    width: rem(105px);
+    height: rem(3px);
+    background-color: $sky-color;
+    margin: 0 auto rem(45px);
+  }
+  .section_form_text {
+    text-align: center;
+    font: 700 rem(18px)/1.5 $roboto;
+    color: #0b0a0d;
+  }
+}
+
+.feedback {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  input {
+    width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 100%;
+    flex: 1 1 100%;
+    height: rem(60px);
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    font: normal rem(20px)/1.5 $sylfaen;
+    color: $black-color;
+    border-bottom: solid rem(1px) rgba(39, 39, 49, .53);
+    margin-bottom: rem(10px);
+
+  }
+  input {
+    outline: none;
+  }
+  input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 rem(50px) #fff !important; /* Цвет фона */
+    -webkit-text-fill-color: $black-color !important; /* цвет текста */
+    color: $black-color !important; /* цвет текста */
+  }
+  .text_label {
+    color: #272731;
+    font: normal rem(20px)/1.5 $sylfaen;
+    margin-top: rem(15px);
+    margin-bottom: rem(10px);
+  }
+  textarea {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    padding: rem(20px);
+    background-color: #e1e7f3;
+    margin-bottom: rem(40px);
+    font: normal rem(18px)/1.5 $sylfaen;
+    max-height: rem(182px);
+    min-height: rem(182px);
+    max-width: rem(465px);
+    min-width: 100%;
+  }
+  .btn {
+    background-color: transparent;
+    max-width: 100%;
+  }
+}
