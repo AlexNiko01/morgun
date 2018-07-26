@@ -29,31 +29,6 @@ class PageController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['home'],
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['news'],
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['publications'],
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['services'],
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['contacts'],
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'allow' => true,
                         'actions' => ['page'],
                         'roles' => ['admin'],
                     ],
@@ -291,11 +266,17 @@ class PageController extends Controller
     public function actionPage($mainSlug)
     {
         $parents = $this->getPages();
+        /**
+         * @var $model Page
+         */
         try {
             $model = $this->findModel($mainSlug)->one();
         } catch (NotFoundHttpException $e) {
             echo $e->getMessage();
         }
+        /**
+         * @var $modelTranslation PageTranslation
+         */
         $modelTranslation = $model->getPagesTranslation($model->id);
 
         $transaction = Yii::$app->db->beginTransaction();
@@ -307,10 +288,7 @@ class PageController extends Controller
                     $modelTranslation->save();
                     $transaction->commit();
                     \Yii::$app->getSession()->setFlash('success', 'Страница была успешно обновлена');
-                    return $this->redirect(['services', [
-                        'model' => $model,
-                        'modelTranslation' => $modelTranslation
-                    ]]);
+                    return $this->redirect(['page/page', 'mainSlug' => $mainSlug], 302);
                 }
             }
         } catch (\Exception $e) {

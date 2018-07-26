@@ -56,11 +56,6 @@ return [
 
                 '/admin' => 'site/index',
                 [
-                    'pattern' => 'upload',
-                    'route' => 'attachment/upload',
-                    'normalizer' => false,
-                ],
-                [
                     'pattern' => 'posts',
                     'route' => 'post/index',
                     'normalizer' => false,

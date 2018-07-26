@@ -73,6 +73,12 @@ class Page extends \yii\db\ActiveRecord
         return PageTranslation::find()->where(['page_id' => $id, 'lang' => $lang])->one();
     }
 
+    public function getPageTranslationRu()
+    {
+
+        return $this->hasOne(PageTranslation::class, ['page_id' => 'id'])->where(['lang' => 'ru']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

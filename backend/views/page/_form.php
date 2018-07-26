@@ -23,6 +23,7 @@ use yii\widgets\ActiveForm;
     echo LanguageMenuWidget::widget();
 } catch (Exception $e) {
 } ?>
+
 <div class="edit_content_wrap">
     <div class="set_names_field">
         <div class="names_field_elem input">
@@ -67,13 +68,13 @@ use yii\widgets\ActiveForm;
 
             ])->label(false) ?>
         </div>
-        <div class="date_add_elem">
-            <p class="date_add_title">Родительская страница:</p>
-            <?php echo $form->field($model, 'parent_id')->dropDownList(
-                $parents
-            )->label(false) ?>
-
-        </div>
+<!--        <div class="date_add_elem">-->
+<!--            <p class="date_add_title">Родительская страница:</p>-->
+<!--            --><?php //echo $form->field($model, 'parent_id')->dropDownList(
+//                $parents
+//            )->label(false) ?>
+<!---->
+<!--        </div>-->
     </div>
 
     <div class="buttons_set">
