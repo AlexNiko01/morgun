@@ -32,9 +32,7 @@ class LangRequest extends Request
             $this->langUrl = $this->getUrl();
 
             $urlList = explode('/', $this->langUrl);
-
             $langUrl = isset($urlList[1]) ? $urlList[1] : null;
-
             Lang::setCurrent($langUrl);
 
             if ($langUrl !== null && $langUrl === Lang::getCurrent()->url &&
@@ -53,15 +51,12 @@ class LangRequest extends Request
     protected function resolvePathInfo()
     {
         $pathInfo = $this->getLangUrl();
-
         if (($pos = strpos($pathInfo, '?')) !== false) {
             $pathInfo = substr($pathInfo, 0, $pos);
         }
-
         $pathInfo = urldecode($pathInfo);
 
-        // try to encode in UTF8 if not so
-        // http://w3.org/International/questions/qa-forms-utf-8.html
+
         if (!preg_match('%^(?:
             [\x09\x0A\x0D\x20-\x7E]              # ASCII
             | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
@@ -115,7 +110,6 @@ class LangRequest extends Request
             case ServiceController::class:
                 $url = $this->proceedServices($lang, $url);
                 break;
-
         }
         return $lang . $url;
     }
@@ -129,17 +123,32 @@ class LangRequest extends Request
     {
         $slugAction = \Yii::$app->request->get('action') ?? \Yii::$app->request->get('parentSlug');
         $translationCur = PageTranslation::find()->where(['slug' => $slugAction])->one();
-        if(!$translationCur) return $url;
+
+
+
+        if (!$translationCur) return $url;
         /**
          * @var Page $page
          */
         $page = $translationCur->page;
         $needleTranslation = $page->getPagesTranslations()->where(['lang' => $lang])->one();
-        if(!$needleTranslation) return $url;
+
+        if ($translationCur->page->main_slug === 'about-us') {
+            $urlArr = explode('/', $url);
+            if (count($urlArr) == 3) {
+                $childSlug = $urlArr[2];
+                $translationChildCur = PageTranslation::find()->where(['slug' => $childSlug])->one();
+                $childPage = $translationChildCur->page;
+                $needleTranslationChild = $childPage->getPagesTranslations()->where(['lang' => $lang])->one();
+                $url = str_replace($translationChildCur->slug, $needleTranslationChild->slug, $url);
+                return str_replace($translationCur->slug, $needleTranslation->slug, $url);
+            }
+        }
+
+        if (!$needleTranslation) return $url;
 
         return str_replace($translationCur->slug, $needleTranslation->slug, $url);
     }
-
 
     /**
      * @param string $lang
@@ -148,22 +157,21 @@ class LangRequest extends Request
      */
     protected function proceedPost(string $lang, string $url): string
     {
-        if(\Yii::$app->request->get('parentSlug') || \Yii::$app->request->get('action')) {
+        if (\Yii::$app->request->get('parentSlug') || \Yii::$app->request->get('action')) {
             $url = $this->proceedPage($lang, $url);
         }
         $slugAction = \Yii::$app->request->get('slug');
         $translationCur = PostsTranslations::find()->where(['slug' => $slugAction])->one();
-        if(!$translationCur) return $url;
+        if (!$translationCur) return $url;
         /**
          * @var Post $post
          */
         $post = $translationCur->post;
         $needleTranslation = $post->getPostsTranslations()->where(['lang' => $lang])->one();
-        if(!$needleTranslation) return $url;
+        if (!$needleTranslation) return $url;
 
         return str_replace($translationCur->slug, $needleTranslation->slug, $url);
     }
-
 
     /**
      * @param string $lang
@@ -172,18 +180,18 @@ class LangRequest extends Request
      */
     protected function proceedServices(string $lang, string $url): string
     {
-        if(\Yii::$app->request->get('parentSlug') || \Yii::$app->request->get('action')) {
+        if (\Yii::$app->request->get('parentSlug') || \Yii::$app->request->get('action')) {
             $url = $this->proceedPage($lang, $url);
         }
         $slugAction = \Yii::$app->request->get('slug');
         $translationCur = ServiceTranslation::find()->where(['slug' => $slugAction])->one();
-        if(!$translationCur) return $url;
+        if (!$translationCur) return $url;
         /**
          * @var Service $service
          */
         $service = $translationCur->service;
         $needleTranslation = $service->getServicesTranslations()->where(['lang' => $lang])->one();
-        if(!$needleTranslation) return $url;
+        if (!$needleTranslation) return $url;
 
         return str_replace($translationCur->slug, $needleTranslation->slug, $url);
     }

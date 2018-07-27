@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\components;
+namespace common\components;
 
 use common\models\Lang;
 use \yii\bootstrap\Widget;

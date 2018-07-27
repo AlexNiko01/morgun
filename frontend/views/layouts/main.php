@@ -4,7 +4,7 @@
 
 /* @var $content string */
 
-use frontend\components\WLang;
+use common\components\WLang;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use \frontend\components\MenuWidget;
@@ -25,9 +25,11 @@ AppAsset::register($this);
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122307379-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-122307379-1');

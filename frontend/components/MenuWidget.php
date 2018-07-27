@@ -3,12 +3,10 @@
 namespace frontend\components;
 
 use common\models\PageTranslation;
-use frontend\controllers\ServiceController;
 use common\models\Lang;
 use common\models\Page;
 use common\models\Service;
 use \common\models\ServiceTranslation;
-use frontend\controllers\PageController;
 use frontend\controllers\PostController;
 use Yii;
 use yii\helpers\Url;
