@@ -45,6 +45,7 @@ class PageController extends AppFrontendController
 
     public function actionContacts()
     {
+
         $this->setMeta('Контакты');
         try {
             $contacts = $this->findModel('contacts');
@@ -102,6 +103,16 @@ class PageController extends AppFrontendController
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    public function actionAbout($slug)
+    {
+        $lang = Lang::getCurrent()->url;
+        $pageTranslation = PageTranslation::find()->where(['slug' => $slug])->one();
+        $mainSlug = $pageTranslation->page->main_slug;
+        $this->registerMetaTags($pageTranslation);
+
+        return $this->render($lang . '/' . $mainSlug);
+    }
+
     public function actionNews()
     {
         try {
@@ -137,8 +148,8 @@ class PageController extends AppFrontendController
             case 'services':
                 return Yii::$app->runAction('service/view', ['slug' => $slug]);
                 break;
-            case 'blog':
-                return Yii::$app->runAction('post/view', ['slug' => $slug]);
+            case 'about-us':
+                return Yii::$app->runAction('page/about', ['slug' => $slug]);
                 break;
         }
     }

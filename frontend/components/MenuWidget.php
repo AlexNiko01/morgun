@@ -2,6 +2,7 @@
 
 namespace frontend\components;
 
+use common\models\PageTranslation;
 use frontend\controllers\ServiceController;
 use common\models\Lang;
 use common\models\Page;
@@ -47,6 +48,7 @@ class MenuWidget extends \yii\base\Widget
                     'parentSlug' => PageHelper::pageSlug('services')
                 ]
             );
+            $serviceTranslation['active'] = ($serviceTranslation['slug'] === Yii::$app->controller->actionParams['slug']) ? $serviceTranslation['slug'] : '';
             $servicesTranslations[] = $serviceTranslation;
         }
         $tree = [];
@@ -60,6 +62,28 @@ class MenuWidget extends \yii\base\Widget
         return $tree;
     }
 
+    protected function getAboutsTree()
+    {
+        $id = Page::find()->where(['main_slug' => 'about-us'])->select('id')->one();
+        $aboutsSample = Page::find()->where(['parent_id' => $id])->all();
+        $abouts = [];
+        foreach ($aboutsSample as $aboutSample) {
+            $about = [];
+            $aboutTranslation = PageTranslation::find()->where(['page_id' => $aboutSample->id, 'lang' => Lang::getCurrent()->url])->one();
+            $about['title'] = $aboutTranslation->name;
+            $about['url'] = Url::to(
+                [
+                    'page/gate',
+                    'slug' => $aboutTranslation['slug'],
+                    'parentSlug' => PageHelper::pageSlug('about-us')
+                ]
+            );
+            $about['active'] = ($aboutTranslation['slug'] === Yii::$app->controller->actionParams['slug']) ? $aboutTranslation['slug'] : '';
+            $abouts[] = $about;
+        }
+        return $abouts;
+    }
+
     /**
      * @return string
      */
@@ -67,22 +91,33 @@ class MenuWidget extends \yii\base\Widget
     {
         $active = '';
         $currentController = Yii::$app->controller;
-        $class = get_class($currentController);
-        switch ($class) {
-            case PageController::class:
-                $active = $currentController->action->id == 'home' ? 'home' : 'contacts';
+        $action = $currentController->action->id;
+//        var_dump($currentController->id, $action, $currentController->actionParams);
+        switch ($action) {
+            case 'home':
+                $active = 'home';
                 break;
-            case PostController::class:
+            case'news':
                 $active = 'blog';
                 break;
-            case ServiceController::class:
+            case 'index':
                 $active = 'services';
                 break;
-
+            case 'view':
+                $active = $currentController->id === 'service' ? 'services' : false;
+                break;
+            case 'about':
+                $active = 'about-us';
+                break;
+            case  'page':
+                $active = 'contacts';
+                break;
         }
 
         $home = Page::find()->where(['main_slug' => 'home'])->one();
         $services = Page::find()->where(['main_slug' => 'services'])->one();
+        $about = Page::find()->where(['main_slug' => 'about-us'])->one();
+        $aboutFirm = Page::find()->where(['main_slug' => 'about-firm'])->one();
         $news = Page::find()->where(['main_slug' => 'news'])->one();
         $contacts = Page::find()->where(['main_slug' => 'contacts'])->one();
 
@@ -97,6 +132,12 @@ class MenuWidget extends \yii\base\Widget
                 'title' => $services->pageTranslationFrontend['name'],
                 'children' => $this->getServicesTree(),
                 'active' => ($active === 'services') ? true : false
+            ],
+            [
+                'url' => Url::to(['page/gate', 'parentSlug' => $about->pageTranslationFrontend['slug'], 'slug' => $aboutFirm->pageTranslationFrontend['slug']]),
+                'title' => $about->pageTranslationFrontend['name'],
+                'children' => $this->getAboutsTree(),
+                'active' => ($active === 'about-us') ? true : false
             ],
             [
                 'url' => Url::to(['page/page', 'action' => $news->pageTranslationFrontend['slug']]),

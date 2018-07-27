@@ -6,7 +6,6 @@
  */
 ?>
 
-
 <?php if ($route) :; ?>
     <li class="nav_elem <?php echo $route['active'] ? 'active' : ''; ?>">
         <a class="nav_link" href="<?php echo $route['url'] ?? ''; ?>">
@@ -22,6 +21,7 @@
         if ($children = $route['children'] ?? null) { ?>
             <ul class="nav_list_more">
                 <?php foreach ($children as $child) {
+
                     echo $this->render('first-children', [
                         'route' => $child
                     ]);
