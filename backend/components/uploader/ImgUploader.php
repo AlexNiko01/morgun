@@ -24,6 +24,13 @@ class ImgUploader
             if(!file_exists(\Yii::$app->basePath . '/../frontend/web/uploads/')){
                 mkdir(\Yii::$app->basePath . '/../frontend/web/uploads/', 0755, true);
             }
+//            $file->saveAs('../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension);
+//            $this->cropImage($desktopWidth, '../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension);
+//
+//            copy('../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension, '../../frontend/web/uploads/mobile/' . $file->baseName . '.' . $file->extension);
+//            $this->cropImage($mobileWidth, '../../frontend/web/uploads/mobile/' . $file->baseName . '.' . $file->extension);
+//
+//            return $this->saveUpload($file);
             $this->path = \Yii::$app->basePath . '/../frontend/web/uploads/' . $this->fileName;
             $this->url = '/uploads/' . $this->fileName;
         }

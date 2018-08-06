@@ -39,12 +39,9 @@ use frontend\components\SocialsWidget;
                         } ?>
 
                     </div>
-
                 </aside>
-
                 <h1 itemprop="serviceType"><?php echo (!empty($service->heading)) ? $service->heading : ''; ?></h1>
                 <?php echo (!empty($service->content)) ? $service->content : ''; ?>
-
             </div>
         </div>
         <img class="shape_left" src="/img/shape-left.png" alt="">
