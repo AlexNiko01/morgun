@@ -12,7 +12,6 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'language' => 'ru-RU',
     'bootstrap' => ['log'],
-    'modules' => [],
     'timeZone' => 'Europe/Kiev',
     'homeUrl' => '/admin',
     'components' => [
@@ -89,6 +88,12 @@ return [
 //                ],
 //            ],
         ],
+    ],
+    'modules' => [
+        'redactor' => 'yii\redactor\RedactorModule',
+          'class' => 'yii\redactor\RedactorModule',
+          'uploadDir' => '/frontend/uploads',
+          'uploadUrl' => '/hello/uploads',
     ],
     'params' => $params,
 ];

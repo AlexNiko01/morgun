@@ -3,6 +3,7 @@
 use backend\components\localization\LanguageMenuWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
 
 
 /* @var $this yii\web\View */
@@ -161,13 +162,21 @@ $actionId = Yii::$app->controller->action->id; ?>
             <?php echo (isset($postTranslation->excerpt) && !empty($postTranslation->excerpt)) ? $postTranslation->excerpt : '' ?>
         </div>
     </div>
-    <div class="editor_wrap editor_big">
-        <div class="editor_title"><p>Полный текст</p></div>
-        <?php echo $form->field($postTranslation, 'content')->textarea(['class' => 'editor_textarea'])->label(false) ?>
-        <div class="editor">
-            <?php echo (isset($postTranslation->content) && !empty($postTranslation->content)) ? $postTranslation->content : '' ?>
-        </div>
-    </div>
+<!--    <div class="editor_wrap editor_big">-->
+<!--        <div class="editor_title"><p>Полный текст</p></div>-->
+<!--        --><?php //echo $form->field($postTranslation, 'content')->textarea(['class' => 'editor_textarea'])->label(false) ?>
+<!--        <div class="editor">-->
+<!--            --><?php //echo (isset($postTranslation->content) && !empty($postTranslation->content)) ? $postTranslation->content : '' ?>
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+
+    <?= $form->field($postTranslation, 'content')->widget(\yii\redactor\widgets\Redactor::class) ?>
+
+
     <?php if ($actionId === 'update'): ; ?>
         <div class="date_add">
             <div class="date_add_elem">
