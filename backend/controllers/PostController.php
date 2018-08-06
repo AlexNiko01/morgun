@@ -20,6 +20,16 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'file' => 'yii\redactor\actions\FileUploadAction',
+            'image' => 'yii\redactor\actions\ImageUploadAction',
+            'image-json' => 'yii\redactor\actions\ImageManagerJsonAction',
+            'file-json' => 'yii\redactor\actions\FileManagerJsonAction',
+        ];
+    }
     /**
      * {@inheritdoc}
      */

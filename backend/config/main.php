@@ -90,10 +90,12 @@ return [
         ],
     ],
     'modules' => [
-        'redactor' => 'yii\redactor\RedactorModule',
-          'class' => 'yii\redactor\RedactorModule',
-          'uploadDir' => '/frontend/uploads',
-          'uploadUrl' => '/hello/uploads',
+        'redactor' => [
+            'class' => 'yii\redactor\RedactorModule',
+            'uploadDir' => '@frontend/web/uploads',
+            'uploadUrl' => '/uploads',
+            'imageAllowExtensions'=>['jpg','png','gif']
+        ],
     ],
     'params' => $params,
 ];
