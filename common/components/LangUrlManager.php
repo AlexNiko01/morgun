@@ -29,14 +29,14 @@ class LangUrlManager extends UrlManager
         if (isset($params['page']) && isset($params['per-page']) && $params[0] === 'post/index') {
             $params[0] = 'page/page';
         }
-
+        $lang->current['url'];
         $url = parent::createUrl($params);
 
-//        if (Lang::getCurrent()->url === 'ru') {
-//            return $url;
-//        } else {
+        if ($lang->current['url'] === 'ru') {
+            return $url;
+        } else {
             return $url == '/' ? '/' . $lang->url : '/' . $lang->url . $url;
-//        }
+        }
 
     }
 }

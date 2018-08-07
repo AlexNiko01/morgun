@@ -30,7 +30,7 @@ class LangRequest extends Request
     {
         if ($this->langUrl === null) {
             $this->langUrl = $this->getUrl();
-
+            $this->langUrl = preg_replace("~\/(?!.*\/)~", '', $this->langUrl);
             $urlList = explode('/', $this->langUrl);
             $langUrl = isset($urlList[1]) ? $urlList[1] : null;
             Lang::setCurrent($langUrl);
@@ -111,9 +111,9 @@ class LangRequest extends Request
                 $url = $this->proceedServices($lang, $url);
                 break;
         }
-//        if ($lang === 'ru') {
-//            return $url;
-//        }
+        if ($lang === 'ru') {
+            return $url;
+        }
         return $lang . $url;
     }
 

@@ -4,6 +4,14 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
+
+    RewriteCond %{REQUEST_URI} !\?
+    RewriteCond %{REQUEST_URI} !\&
+    RewriteCond %{REQUEST_URI} !\=
+    RewriteCond %{REQUEST_URI} !\.
+    RewriteCond %{REQUEST_URI} !\/$
+    RewriteRule ^(.*[^\/])$ /$1/ [R=301,L]
+
     # если /admin, то в backend
     RewriteCond %{REQUEST_URI} ^/(admin)
     RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
@@ -29,4 +37,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^.*$ frontend/web/index.php
+
+
+
+
 </IfModule>
