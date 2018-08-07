@@ -111,6 +111,9 @@ class LangRequest extends Request
                 $url = $this->proceedServices($lang, $url);
                 break;
         }
+//        if ($lang === 'ru') {
+//            return $url;
+//        }
         return $lang . $url;
     }
 
@@ -123,7 +126,6 @@ class LangRequest extends Request
     {
         $slugAction = \Yii::$app->request->get('action') ?? \Yii::$app->request->get('parentSlug');
         $translationCur = PageTranslation::find()->where(['slug' => $slugAction])->one();
-
 
 
         if (!$translationCur) return $url;

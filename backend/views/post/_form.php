@@ -41,7 +41,7 @@ $actionId = Yii::$app->controller->action->id; ?>
                 '' => '',
                 'news' => 'Новость',
                 'articles' => 'Статья',
-            ])->label(false) ?>
+            ], ['class' => 'form-control'])->label(false) ?>
         </div>
         <div class="names_field_elem input">
             <?php echo $form->field($postTranslation, 'name')->textInput(['class' => 'n_f_e_field input_field translitSet',
@@ -55,7 +55,6 @@ $actionId = Yii::$app->controller->action->id; ?>
             <p class="field_placeholder placeholder">Адрес статьи</p>
         </div>
     </div>
-
 
     <div class="set_names_field gray focus">
         <div class="names_field_elem input">
@@ -137,16 +136,16 @@ $actionId = Yii::$app->controller->action->id; ?>
             <?php echo (isset($postTranslation->excerpt) && !empty($postTranslation->excerpt)) ? $postTranslation->excerpt : '' ?>
         </div>
     </div>
-<!--    <div class="editor_wrap editor_big">-->
-<!--        <div class="editor_title"><p>Полный текст</p></div>-->
-<!--        --><?php //echo $form->field($postTranslation, 'content')->textarea(['class' => 'editor_textarea'])->label(false) ?>
-<!--        <div class="editor">-->
-<!--            --><?php //echo (isset($postTranslation->content) && !empty($postTranslation->content)) ? $postTranslation->content : '' ?>
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="editor_wrap editor_big">-->
+    <!--        <div class="editor_title"><p>Полный текст</p></div>-->
+    <!--        --><?php //echo $form->field($postTranslation, 'content')->textarea(['class' => 'editor_textarea'])->label(false) ?>
+    <!--        <div class="editor">-->
+    <!--            --><?php //echo (isset($postTranslation->content) && !empty($postTranslation->content)) ? $postTranslation->content : '' ?>
+    <!--        </div>-->
+    <!--    </div>-->
 
 
-    <?= $form->field($postTranslation, 'content')->widget(\yii\redactor\widgets\Redactor::class,[
+    <?= $form->field($postTranslation, 'content')->widget(\yii\redactor\widgets\Redactor::class, [
         'clientOptions' => [
             'imageUpload' => \yii\helpers\Url::to(['/redactor/upload/image']),
         ],
