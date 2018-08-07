@@ -79,31 +79,6 @@ $actionId = Yii::$app->controller->action->id; ?>
     <div class="images_add">
         <div class="images_add_elem cropper_change images_add_big">
             <div class="images_add_img cropper_change_img" data-width="920" data-height="500">
-                <?php if (isset($postTranslation->intro->url) && !empty($postTranslation->intro->url)): ; ?>
-                    <img src="<?php echo $postTranslation->intro->url ?? ''; ?>"
-                         alt="<?php echo $postTranslation->intro->alt ?? ''; ?>" class="previewResult img_true">
-                <?php else: ; ?>
-                    <img src="../img/no_photo.jpg"
-                         alt="no_photo" class="previewResult img_true">
-                <?php endif; ?>
-            </div>
-            <div class="images_add_control">
-                <p class="images_add_title">Баннер статьи</p>
-                <label class="file_upload">
-                    <input type="file" class="previewSet">
-                    <span class="text_file_upload">Выберите файл</span>
-                    <i></i>
-                </label>
-                <div class="input images_add_alt">
-                    <input type="text" placeholder="" class="input_field imgAlt" name="intro[alt]">
-                    <p class="placeholder">Alt:</p>
-                </div>
-            </div>
-            <input class="img_result_data" type="hidden" name="intro[fileEncoded]">
-            <input class="img_name_data" type="hidden" name="intro[fileName]">
-        </div>
-        <div class="images_add_elem cropper_change images_add_big">
-            <div class="images_add_img cropper_change_img" data-width="920" data-height="500">
                 <?php if (isset($postTranslation->attachment->url) && !empty($postTranslation->attachment->url)): ; ?>
                     <img src="<?php echo $postTranslation->attachment->url ?? ''; ?>"
                          alt="<?php echo $postTranslation->attachment->alt ?? ''; ?>" class="previewResult img_true">
@@ -171,12 +146,11 @@ $actionId = Yii::$app->controller->action->id; ?>
 <!--    </div>-->
 
 
-
-
-
-    <?= $form->field($postTranslation, 'content')->widget(\yii\redactor\widgets\Redactor::class) ?>
-
-
+    <?= $form->field($postTranslation, 'content')->widget(\yii\redactor\widgets\Redactor::class,[
+        'clientOptions' => [
+            'imageUpload' => \yii\helpers\Url::to(['/redactor/upload/image']),
+        ],
+    ]) ?>
     <?php if ($actionId === 'update'): ; ?>
         <div class="date_add">
             <div class="date_add_elem">

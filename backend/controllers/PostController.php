@@ -20,6 +20,16 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'file' => 'yii\redactor\actions\FileUploadAction',
+            'image' => 'yii\redactor\actions\ImageUploadAction',
+            'image-json' => 'yii\redactor\actions\ImageManagerJsonAction',
+            'file-json' => 'yii\redactor\actions\FileManagerJsonAction',
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -145,7 +155,7 @@ class PostController extends Controller
                     $postTranslation->post_id = $post->id;
 
                     if ($postTranslation->save()) {
-                        $resultTranslation = $this->createTranslations($post, $introId, $attachmentId, $thumbnailId, $curLang);
+                        $resultTranslation = $this->createTranslations($post, $attachmentId, $thumbnailId, $curLang);
                         if ($resultTranslation) {
                             $transaction->commit();
                             \Yii::$app->getSession()->setFlash('success', 'статья была успешно создана');
@@ -173,13 +183,12 @@ class PostController extends Controller
 
     /**
      * @param Post $post
-     * @param $introId
      * @param $attachmentId
      * @param $thumbnailId
      * @param $curLang
      * @return bool
      */
-    protected function createTranslations(Post $post, $introId, $attachmentId, $thumbnailId, $curLang)
+    protected function createTranslations(Post $post, $attachmentId, $thumbnailId, $curLang)
     {
         $langs = Lang::getAllLangs();
         $request = Yii::$app->request->post();
@@ -188,7 +197,7 @@ class PostController extends Controller
             if ($lang === $curLang) {
                 continue;
             }
-            $postTranslation = PostsTranslations::saveTranslation($request, $post, $lang, $introId, $attachmentId, $thumbnailId);
+            $postTranslation = PostsTranslations::saveTranslation($request, $post, $lang, $attachmentId, $thumbnailId);
             if ($postTranslation->hasErrors()) {
                 $success = false;
             }
@@ -222,17 +231,8 @@ class PostController extends Controller
                 $thumbnailId = null;
                 $attachmentId = null;
                 $thumbnailId = null;
-                $intro = Yii::$app->request->post('intro');
-                if ($introId['fileEncoded']
-                    && $introId['fileName']
-                    && $introId['alt']
-                ) {
-                    $introId = (new ImgUploader($intro))
-                        ->saveUpload()
-                        ->cropImage(1680)
-                        ->getAttachment();
-                    $postTranslation->intro_id = $introId;
-                }
+
+
                 $attachment = Yii::$app->request->post('attachment');
                 if ($attachment['fileEncoded']
                     && $attachment['fileName']
