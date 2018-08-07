@@ -1,0 +1,101 @@
+.users_admin_wrap {
+  margin: rem(65px) rem(50px);
+  padding-bottom: rem(50px);
+  .input_elem_title {
+    margin-right: rem(25px);
+  }
+  .btn_dote {
+    align-self: flex-end;
+    margin-bottom: rem(10px);
+  }
+  .users_admin_list {
+    margin-bottom: rem(70px);
+  }
+  .buttons_set {
+    margin-bottom: rem(50px);
+  }
+}
+
+.buttons_set {
+  display: flex;
+  align-items: center;
+  .btn {
+    margin-right: rem(33px);
+  }
+}
+
+.users_admin_elem {
+  display: flex;
+  align-items: center;
+  margin-bottom: rem(22px);
+}
+
+.user_edit_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: rem(80px);
+  .user_edit_photo {
+    width: 100%;
+    max-width: rem(390px);
+    display: flex;
+    justify-content: center;
+  }
+  .user_edit_data {
+    width: 100%;
+    max-width: rem(800px);
+  }
+  .buttons_set {
+    width: 100%;
+    justify-content: center;
+    padding-top: rem(40px);
+  }
+
+}
+
+.user_edit_photo_set {
+  width: rem(235px);
+  height: rem(235px);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .file_upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0;
+    border: none;
+    border-radius: 50%;
+  }
+}
+
+.user_edit_data {
+  display: flex;
+  flex-wrap: wrap;
+  .law_edit_elem {
+    margin-bottom: rem(70px);
+  }
+}
+
+.law_edit_elem {
+  display: flex;
+  align-items: center;
+  margin: 0 rem(30px);
+  .input {
+    max-width: rem(280px);
+  }
+  .btn_dote {
+    margin-left: rem(14px);
+  }
+}

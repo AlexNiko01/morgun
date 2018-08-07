@@ -1,0 +1,59 @@
+.enter_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  .enter_block_wrap {
+    width: 100%;
+    max-width: rem(740px);
+    box-shadow: 0 rem(1px) rem(3px) rgba(9, 55, 164, 0.16);
+    background-color: #fff;
+    padding: rem(80px) rem(95px);
+  }
+  .enter_block_title {
+    text-align: center;
+    color: $colorBlue;
+    font-size: rem(30px);
+    font-weight: 700;
+    margin-bottom: rem(45px);
+  }
+  .enter_block_text {
+    text-align: center;
+    margin-bottom: rem(40px);
+  }
+  .form_enter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .input {
+    margin-bottom: rem(28px);
+    max-width: 100%;
+  }
+  input {
+    max-width: 100%;
+
+  }
+  .form_enter_bottom {
+    width: 100%;
+    max-width: rem(469px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: rem(12px);
+    a {
+      color: $colorBlue;
+      font-weight: 700;
+      font-size: rem(18px);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .btn {
+      max-width: rem(217px);
+    }
+  }
+}

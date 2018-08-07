@@ -1,0 +1,228 @@
+.language_set {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: rem(25px) rem(95px) rem(25px) rem(95px);
+  border-bottom: solid rem(2px) #eef1f8;
+  a, button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(43px);
+    height: rem(43px);
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+    color: $colorBlue;
+    margin-right: rem(8px);
+    transition: color .35s, background-color .35s;
+    font-size: rem(16px);
+    &:hover {
+      background-color: #d3daeb;
+    }
+    &.active {
+      background-color: $colorBlue;
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+}
+
+.edit_content_wrap {
+  margin: rem(50px) rem(50px);
+  padding-bottom: rem(58px);
+  .buttons_set {
+    margin-top: rem(15px);
+    justify-content: center;
+    .btn {
+      margin: 0 rem(15px);
+    }
+  }
+}
+
+.set_names_field {
+  display: flex;
+  justify-content: center;
+  margin-left: rem(-20px);
+  margin-right: rem(-20px);
+  flex-wrap: wrap;
+  .names_field_elem {
+    width: 100%;
+    max-width: 50%;
+    flex: 1 1 28%;
+    margin: 0 rem(20px) rem(28px);
+    &.price_width_small {
+      flex: 1 1 8%;
+    }
+  }
+  .n_f_e_field {
+    width: 100%;
+    max-width: 100%;
+    min-width: rem(250px);
+    height: rem(100px);
+    min-height: rem(100px);
+    max-height: rem(100px);
+    font: 400 rem(18px)/1.4 $fontMain;
+    color: #7280a2;
+    border: 1px solid #bdc3d3;
+    background-color: #fff;
+    padding: rem(20px) rem(20px) rem(25px) rem(35px);
+  }
+  .field_placeholder {
+    top: rem(30px);
+    left: rem(35px);
+  }
+  &.gray {
+    .n_f_e_field {
+      background-color: #e1e4ee;
+      border-color: #e1e4ee;
+    }
+  }
+  &.two {
+    .names_field_elem {
+      &:nth-child(2n + 2) {
+        margin-right: 0;
+      }
+    }
+  }
+  &.one {
+    .names_field_elem {
+      margin-right: 0;
+    }
+  }
+}
+
+.images_add_img {
+  width: 100%;
+  max-width: rem(300px);
+  height: rem(230px);
+  position: relative;
+  border: rem(1px) solid #bdc3d3;
+  margin-right: rem(75px);
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+  }
+}
+
+.images_add_big {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: rem(65px);
+  .images_add_img {
+    max-width: rem(915px);
+    height: rem(500px);
+  }
+}
+
+.images_add_small {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: rem(75px);
+}
+
+.images_add_title {
+  font-size: rem(20px);
+  font-weight: 700;
+  margin-bottom: rem(22px);
+  text-align: center;
+  color: $colorBlue;
+}
+
+.images_add_control {
+  .file_upload {
+    margin-bottom: rem(24px);
+  }
+  .images_add_alt {
+    width: rem(265px);
+    input {
+      padding-left: rem(35px);
+    }
+    .placeholder {
+      left: rem(35px);
+    }
+  }
+}
+
+.images_add_small {
+  display: flex;
+  align-items: flex-start;
+}
+
+.editor_wrap, .editor_slider {
+  border: rem(1px) solid #bdc3d3;
+  margin-bottom: rem(65px);
+  .editor_textarea {
+    display: none;
+  }
+}
+
+.editor_title {
+  display: flex;
+  padding: rem(25px) rem(30px) rem(15px) rem(30px);
+  color: #7280a2;
+  font-size: rem(18px);
+  border-bottom: solid rem(2px) #dee1e9;
+}
+
+.editor_small {
+  .ql-container {
+    height: rem(240px);
+  }
+}
+
+.editor_slider {
+  height: rem(240px) !important;
+}
+
+.editor_big {
+  .ql-container {
+    height: rem(500px);
+  }
+}
+
+.date_add {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.date_add_elem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  max-width: 33.33%;
+  margin: 0 rem(15px) rem(40px);
+  input {
+    width: rem(210px);
+    height: rem(60px);
+    text-align: center;
+  }
+  .date_add_title {
+    max-width: rem(190px);
+    margin-bottom: rem(15px);
+    line-height: 1.2;
+    color: #7280a2;
+    font-size: rem(18px);
+  }
+}
+
+.editor_wrap, .editor_slider {
+  .buttons_set {
+    margin-bottom: rem(65px);
+  }
+}
+
+.none_border {
+
+}

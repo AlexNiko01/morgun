@@ -1,0 +1,52 @@
+.payment_form {
+  padding-bottom: rem(170px);
+  .payment_form_wrap {
+    margin: rem(50px);
+    border: rem(1px) solid #dde3f1;
+  }
+  .payment_title {
+    background-color: #fbfbfb;
+    border-bottom: solid rem(1px) #eceff6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(20px) rem(5px);
+    line-height: 1.2;
+    color: $colorBlue;
+    text-align: center;
+    margin-bottom: rem(44px);
+  }
+  .payment_data {
+    text-align: center;
+    margin-bottom: rem(60px);
+  }
+  .payment_form_content {
+    width: 100%;
+    max-width: rem(750px);
+    margin: 0 auto rem(50px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .sub_payment {
+    margin: 0 auto rem(140px);
+  }
+
+}
+
+.payment_elem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: rem(30px);
+  .payment_holder {
+    font-size: rem(18px);
+    color: $colorBlue;
+    margin-right: rem(19px);
+    width: 100%;
+    max-width: rem(118px);
+  }
+  input {
+    max-width: rem(570px);
+  }
+}

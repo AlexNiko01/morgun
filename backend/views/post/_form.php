@@ -35,8 +35,8 @@ $actionId = Yii::$app->controller->action->id; ?>
 } ?>
 <div class="edit_content_wrap">
     <div class="set_names_field">
-        <div class="date_add_elem">
-            <p class="date_add_title">Вид поста:</p>
+        <div class="names_field_elem input">
+            <p class="field_placeholder placeholder">Вид поста:</p>
             <?php echo $form->field($post, 'post_type')->dropDownList([
                 '' => '',
                 'news' => 'Новость',
@@ -77,8 +77,8 @@ $actionId = Yii::$app->controller->action->id; ?>
 
 
     <div class="images_add">
-        <div class="images_add_elem cropper_change images_add_big">
-            <div class="images_add_img cropper_change_img" data-width="920" data-height="500">
+        <div class="images_add_elem images_add_big">
+            <div class="images_add_img">
                 <?php if (isset($postTranslation->attachment->url) && !empty($postTranslation->attachment->url)): ; ?>
                     <img src="<?php echo $postTranslation->attachment->url ?? ''; ?>"
                          alt="<?php echo $postTranslation->attachment->alt ?? ''; ?>" class="previewResult img_true">
@@ -102,8 +102,8 @@ $actionId = Yii::$app->controller->action->id; ?>
             <input class="img_result_data" type="hidden" name="attachment[fileEncoded]">
             <input class="img_name_data" type="hidden" name="attachment[fileName]">
         </div>
-        <div class="images_add_elem cropper_change images_add_small">
-            <div class="images_add_img cropper_change_img" data-width="300" data-height="230">
+        <div class="images_add_elem images_add_small">
+            <div class="images_add_img">
                 <?php if (isset($postTranslation->thumbnail->url) && !empty($postTranslation->thumbnail->url)): ; ?>
                     <img src="<?php echo isset($postTranslation->thumbnail->url) ? $postTranslation->thumbnail->url : ''; ?>"
                          alt="" class="previewResult img_true">
