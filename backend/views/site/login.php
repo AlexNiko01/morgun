@@ -35,9 +35,10 @@ AppAsset::register($this);
         <p class="enter_block_text">Пожалуйста, авторизируйтесь</p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'class' => 'login-form']); ?>
-        <div class="input">
+        <div class="input focus">
             <i class="input_icon fa fa-user"></i>
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => 'input_field'])->label(false) ?>
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' =>
+            'input_field'])->label(false) ?>
             <p class="placeholder">Логин</p>
         </div>
         <div class="input">
@@ -47,9 +48,8 @@ AppAsset::register($this);
         </div>
         <div class="form_enter_bottom">
             <a href="#">Забыли пароль?</a>
-            <?= Html::submitButton('Login', ['class' => 'btn', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('<span>Login</span><i></i>', ['class' => 'btn', 'name' => 'login-button']) ?>
         </div>
-
         <?php ActiveForm::end(); ?>
     </div>
 </div>
