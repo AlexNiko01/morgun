@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\components\localization\AdminLocalizator;
 use backend\components\uploader\ImgUploader;
+use backend\models\UploadForm;
 use common\models\Lang;
 use common\models\PostSearch;
 use common\models\PostsTranslations;
@@ -14,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -30,6 +32,7 @@ class PostController extends Controller
             'file-json' => 'yii\redactor\actions\FileManagerJsonAction',
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -106,45 +109,26 @@ class PostController extends Controller
     {
         $post = new Post();
         $postTranslation = new PostsTranslations();
+        $model = new UploadForm();
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($postTranslation->load(Yii::$app->request->post())) {
                 $introId = null;
                 $attachmentId = null;
                 $thumbnailId = null;
-                $intro = Yii::$app->request->post('intro');
-                if ($introId['fileEncoded']
-                    && $introId['fileName']
-                    && $introId['alt']
-                ) {
-                    $introId = (new ImgUploader($intro))
-                        ->saveUpload()
-                        ->cropImage(1680)
-                        ->getAttachment();
-                    $postTranslation->intro_id = $introId;
-                }
-                $attachment = Yii::$app->request->post('attachment');
-                if ($attachment['fileEncoded']
-                    && $attachment['fileName']
-                    && $attachment['alt']
-                ) {
-                    $attachmentId = (new ImgUploader($attachment))
-                        ->saveUpload()
-                        ->cropImage(1680)
-                        ->getAttachment();
-                    $postTranslation->attachment_id = $attachmentId;
-                }
-                $thumbnail = Yii::$app->request->post('thumbnail');
-                if ($thumbnail['fileEncoded']
-                    && $thumbnail['fileName']
-                    && $thumbnail['alt']
-                ) {
-                    $thumbnailId = (new ImgUploader($thumbnail))
-                        ->saveUpload()
-                        ->cropImage(400)
-                        ->getAttachment();
-                    $postTranslation->thumbnail_id = $thumbnailId;
-                }
+
+//                $attachment = Yii::$app->request->post('attachment');
+//                if ($attachment['fileEncoded']
+//                    && $attachment['fileName']
+//                    && $attachment['alt']
+//                ) {
+//                    $attachmentId = (new ImgUploader($attachment))
+//                        ->saveUpload()
+//                        ->cropImage(1680)
+//                        ->getAttachment();
+//                    $postTranslation->attachment_id = $attachmentId;
+//                }
+
 
                 $userID = \Yii::$app->user->identity->getId();
                 $post->user_id = $userID;
@@ -155,6 +139,26 @@ class PostController extends Controller
                     $postTranslation->post_id = $post->id;
 
                     if ($postTranslation->save()) {
+
+                        $model = new UploadForm();
+                        $fileLoaded = $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles[attachment]');
+                        if (!empty($fileLoaded)) {
+                            /**
+                             * @var UploadedFile $file
+                             */
+                            $file = array_shift($fileLoaded);
+                            /**
+                             * @var UploadForm $model
+                             */
+                            $attachment = Yii::$app->request->post('attachment');
+                            $attachmentId = $model->upload(600, 300, $file)
+                                ->saveUpload($attachment['alt'], $attachment['fileName']);
+                            $postTranslation->attachment_id = $attachmentId;
+
+
+                        }
+
+
                         $resultTranslation = $this->createTranslations($post, $attachmentId, $thumbnailId, $curLang);
                         if ($resultTranslation) {
                             $transaction->commit();
@@ -177,6 +181,7 @@ class PostController extends Controller
         return $this->render('create', [
             'post' => $post,
             'postTranslation' => $postTranslation,
+            'model' => $model
 
         ]);
     }
