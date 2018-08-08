@@ -41,7 +41,7 @@ $actionId = Yii::$app->controller->action->id; ?>
                 '' => '',
                 'news' => 'Новость',
                 'articles' => 'Статья',
-            ], ['class' => 'form-control'])->label(false) ?>
+            ], ['class' => 'n_f_e_field input_field'])->label(false) ?>
         </div>
         <div class="names_field_elem input">
             <?php echo $form->field($postTranslation, 'name')->textInput(['class' => 'n_f_e_field input_field translitSet',
@@ -89,7 +89,7 @@ $actionId = Yii::$app->controller->action->id; ?>
             <div class="images_add_control">
                 <p class="images_add_title">Картинка статьи</p>
                 <label class="file_upload">
-                    <input type="file" class="previewSet">
+                    <input type="file" class="previewSet" name="UploadForm[imageFiles][attachment]">
                     <span class="text_file_upload">Выберите файл</span>
                     <i></i>
                 </label>
@@ -114,7 +114,7 @@ $actionId = Yii::$app->controller->action->id; ?>
             <div class="images_add_control">
                 <p class="images_add_title">Миниатюра статьи</p>
                 <label class="file_upload">
-                    <input type="file" class="previewSet">
+                    <input type="file" class="previewSet" name="UploadForm[imageFiles][thumbnail]">
                     <span class="text_file_upload">Выберите файл</span>
                     <i></i>
                 </label>

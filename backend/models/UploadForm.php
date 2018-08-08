@@ -13,6 +13,7 @@ class UploadForm extends Model
      * @var UploadedFile[]
      */
     public $imageFiles;
+    public $file;
 
 
     public function rules()
@@ -26,7 +27,7 @@ class UploadForm extends Model
      * @param $desktopWidth
      * @param $mobileWidth
      * @param $file UploadedFile
-     * @return bool|int
+     * @return bool|string
      */
     public function upload($desktopWidth, $mobileWidth, $file)
     {
@@ -38,14 +39,14 @@ class UploadForm extends Model
                 mkdir(\Yii::$app->basePath . '/../frontend/web/uploads/desktop', 0755, true);
             }
 
-
             $file->saveAs('../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension);
             $this->cropImage($desktopWidth, '../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension);
 
             copy('../../frontend/web/uploads/desktop/' . $file->baseName . '.' . $file->extension, '../../frontend/web/uploads/mobile/' . $file->baseName . '.' . $file->extension);
             $this->cropImage($mobileWidth, '../../frontend/web/uploads/mobile/' . $file->baseName . '.' . $file->extension);
 
-            return $this->saveUpload($file);
+            $this->file = $file;
+            return $this->file;
 
         } else {
             return false;
@@ -64,12 +65,17 @@ class UploadForm extends Model
         $image->save($path);
     }
 
-    public function saveUpload($file)
+    /**
+     * @param $alt
+     * @param $name
+     * @return int
+     */
+    public function saveUpload($alt, $name)
     {
         $attachment = new Attachment();
-        $attachment->alt = $file->baseName;
+        $attachment->alt = $alt;
         $attachment->path = null;
-        $attachment->url = '/uploads/' . $file->baseName . '.' . $file->extension;
+        $attachment->url = '/uploads/' . $name . '.' . $this->file->extension;
         $attachment->save();
 
         return $attachment->id;
